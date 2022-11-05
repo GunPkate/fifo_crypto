@@ -1,12 +1,33 @@
-let values = [
-  ["B", "BTC", 680000.0, 2.5],
-  ["B", "ETH", 43000.0, 12.0],
-  ["B", "BTC", 690000.0, 2.5],
-  ["S", "BTC", 695000.0, 3.0],
-  ["B", "ETH", 43500.0, 13.5],
-  ["S", "BTC", 695000.0, 1.0],
-  ["S", "ETH", 45000.0, 30.0],
-];
+const { readFileSync, promises: fsPromises } = require("fs");
+
+function syncReadFile(filename) {
+  const contents = readFileSync(filename, "utf-8");
+
+  const arr = contents.split(/\r?\n/);
+  let get_values = [];
+  for (let i = 0; i < arr.length; i++) {
+    // console.log(arr[i]);
+    let value = arr[i].split(/[ ,]/);
+    console.log(value);
+    get_values.push(value);
+  }
+  // console.log(arr); // 👉️ ['One', 'Two', 'Three', 'Four']
+
+  return get_values;
+}
+
+// syncReadFile("./crypto.txt");
+
+// let values = [
+//   ["B", "BTC", 680000.0, 2.5],
+//   ["B", "ETH", 43000.0, 12.0],
+//   ["B", "BTC", 690000.0, 2.5],
+//   ["S", "BTC", 695000.0, 3.0],
+//   ["B", "ETH", 43500.0, 13.5],
+//   ["S", "BTC", 695000.0, 1.0],
+//   ["S", "ETH", 45000.0, 30.0],
+// ];
+let values = syncReadFile("./crypto.txt");
 
 let btc = [];
 let eth = [];
